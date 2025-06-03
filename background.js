@@ -1,19 +1,22 @@
 let blockedCount = 0;
 let blockedUrls = [];
 
+// Listen for when a rule is matched (ad blocked)
 chrome.declarativeNetRequest.onRuleMatchedDebug.addListener((info) => {
   blockedCount++;
   blockedUrls.push(info.request.url);
   console.log(`Blocked: ${info.request.url}`);
 });
 
-// Make blocked count available to popup
+// Respond to messages from popup.js
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message === "getBlockedStats") {
+  if (message.type === 'getBlockedInfo') {
     sendResponse({
       count: blockedCount,
       urls: blockedUrls
     });
   }
+  return true; // Needed for async response
 });
+
   
