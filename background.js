@@ -1,7 +1,7 @@
 chrome.runtime.onInstalled.addListener(() => {
     console.log("Ad Blocker Extension Installed");
 });
-
+console.log("Background script loaded");
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message === "getBlockedInfo") {
         sendResponse({
