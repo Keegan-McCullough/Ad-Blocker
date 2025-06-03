@@ -1,9 +1,10 @@
-// Remove elements commonly used for ads
-const adSelectors = ['iframe[src*="ads"]', '[id^="ad-"]', '.ad', '.adsbygoogle'];
-console.log("Ad Blocker script is running.");
-
-window.addEventListener('load', () => {
-  adSelectors.forEach(selector => {
-    document.querySelectorAll(selector).forEach(el => el.remove());
+chrome.runtime.sendMessage("getBlockedInfo", (response) => {
+    document.getElementById("count").textContent = response.blockedCount;
+    const list = document.getElementById("urls");
+    response.blockedUrls.forEach((url) => {
+      const li = document.createElement("li");
+      li.textContent = url;
+      list.appendChild(li);
+    });
   });
-});
+  
