@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>My awesome ad blocker!</title>
-    </head>
+<head><title>Ad Blocker</title></head>
+<body>
+  <h1>Ad Blocker is ON</h1>
+  <p id="count">Loading blocked stats...</p>
+  <ul id="url-list"></ul>
+
+  <script>
+    chrome.runtime.sendMessage("getBlockedStats", (response) => {
+      document.getElementById("count").textContent = `Blocked: ${response.count}`;
+      const ul = document.getElementById("url-list");
+      response.urls.slice(-10).forEach(url => {
+        const li = document.createElement("li");
+        li.textContent = url;
+        ul.appendChild(li);
+      });
+    });
+  </script>
+</body>
 </html>
