@@ -1,17 +1,13 @@
 chrome.runtime.onInstalled.addListener(() => {
     console.log("Ad Blocker Extension Installed");
-  });
+});
 
-
-
-  
-  chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message && message.type === 'getBlockedInfo') {
-      sendResponse({
-        count: "Unavailable in public extensions",
-        urls: []
-      });
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message === "getBlockedInfo") {
+        sendResponse({
+            count: 2,
+            urls: ["https://doubleclick.net", "https://ads.google.com"]
+        });
     }
-    return true;
-  });
-  
+    return true; // Keeps the message channel open for asynchronous responses
+});
