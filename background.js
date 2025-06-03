@@ -3,11 +3,12 @@ chrome.runtime.onInstalled.addListener(() => {
   });
   
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-    if (message.type === 'getBlockedInfo') {
+    if (message && message.type === 'getBlockedInfo') {
       sendResponse({
         count: "Unavailable in public extensions",
         urls: []
       });
     }
+    return true;
   });
   
