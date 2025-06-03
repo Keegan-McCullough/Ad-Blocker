@@ -5,8 +5,7 @@
     "description": "Blocks basic ads on websites.",
     "permissions": [
         "declarativeNetRequest",
-        "declarativeNetRequestWithHostAccess",
-        "webRequuest", "webRequestBlocking"
+        "declarativeNetRequestWithHostAccess"
       ],
     "host_permissions": ["<all_urls>"],
     "background": {
